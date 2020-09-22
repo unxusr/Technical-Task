@@ -69,11 +69,24 @@ def edit_gist(context):
     
 
 @then(u'i should be able to post a comments')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then i should be able to post a comments')
+def post_comments(context):
+
+    # Add comment 1
+    sentence = fake.sentence()
+    write_comment_1 = context.browser.find_element_by_xpath('//*[@id="new_comment_field"]').send_keys(sentence)
+    post_comment_1 = context.browser.find_element_by_xpath('//*[@id="partial-new-comment-form-actions"]/button').click()
+    time.sleep(2)
+
+    # Add comment 2
+    another_sentence = fake.sentence()
+    write_comment_2 = context.browser.find_element_by_xpath('//*[@id="new_comment_field"]').send_keys(another_sentence)
+    post_comment_2 = context.browser.find_element_by_xpath('//*[@id="partial-new-comment-form-actions"]/button').click()
 
 
 @then(u'i can delete a comment successfully')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then i can delete a comment successfully')
+def delete_comment(context):
+    
+    # Delete comment 2//*[@id="gistcomment-3461120"]/div[2]/div[1]/div[1]/details/summary/svg
+    actions_button = context.browser.find_element_by_class_name('//*[@class="timeline-comment-group"]').click()
+    time.sleep(2)
 
