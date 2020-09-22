@@ -1,6 +1,7 @@
 from selenium import webdriver
 import os
 from faker import Faker
+import time
 
 fake = Faker()
 
