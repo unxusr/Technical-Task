@@ -50,9 +50,23 @@ def create_public_gist(context):
 
 
 @then(u'i should be able to edit the gist')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then i should be able to edit the gist')
+def edit_gist(context):
 
+    # Edit existing gist 
+    gist_file = context.browser.find_element_by_xpath('//*[@id="gist-pjax-container"]/div[1]/div/div[1]/ul/li[1]/a').click()
+    add_file_btn = context.browser.find_element_by_xpath('//button[text()="Add file"]').click()
+
+    # write gist file 2 content
+    file_2 = context.browser.find_element_by_xpath('//*[@id="gists"]/div[3]/div/div[2]/div/div[5]/div[1]/div/div/div/div[5]/div/pre')
+    sentence = fake.sentence()
+    file_2.send_keys(sentence)
+
+    # Save gist with 2 files
+    update_gist = context.browser.find_element_by_class_name('btn-primary').click()
+
+    # Assert that file 2 is added 
+    assert context.browser.find_element_by_xpath('//*[@id="file-gistfile2-txt"]/div[1]/div[2]/a').text == 'gistfile2.txt'
+    
 
 @then(u'i should be able to post a comments')
 def step_impl(context):
