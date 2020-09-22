@@ -1,6 +1,8 @@
 from selenium import webdriver
 import os
-import time
+from faker import Faker
+
+fake = Faker()
 
 @given(u'i logged in successfully')
 def login(context):
@@ -25,8 +27,26 @@ def login(context):
 
 
 @when(u'i create a gist')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When i create a gist')
+def create_public_gist(context):
+
+    # Create gist 
+    create_gist_btn = context.browser.find_element_by_xpath('/html/body/div[1]/div/div[5]/a')
+    create_gist_btn.click()
+
+    # Choose gist type
+    gist_type = context.browser.find_element_by_xpath('//*[@id="new_gist"]/div/div[2]/div/details').click()
+    public_gist = context.browser.find_element_by_xpath('//*[@id="new_gist"]/div/div[2]/div/details/details-menu/label[2]/div/span[1]').click()
+
+    # Write the gist content
+    file_1 = context.browser.find_element_by_xpath('//*[@id="gists"]/div[2]/div/div[2]/div/div[5]/div[1]/div/div/div/div[5]/div/pre')
+    sentence = fake.sentence()
+    file_1.send_keys(sentence)
+
+    # Save the public gist
+    create_gist = context.browser.find_element_by_xpath('//*[@id="new_gist"]/div/div[2]/div/button').click()
+
+    # Assert gist existence 
+    assert context.browser.find_element_by_xpath('//*[@id="file-gistfile1-txt-LC1"]').text == sentence
 
 
 @then(u'i should be able to edit the gist')
