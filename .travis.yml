@@ -11,6 +11,5 @@ install:
 
 language: shell
 script: cd Technical-Task 
-script: cd gistAPI
-script: python3 gists.py
+script: cd gistAPI && python3 gists.py
 
