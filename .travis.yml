@@ -1,4 +1,5 @@
 language: shell
-script: cd Technical-Task && cd gistAPI
+script: cd Technical-Task 
+script: cd gistAPI
 script: python3 gistAPI.py
 
