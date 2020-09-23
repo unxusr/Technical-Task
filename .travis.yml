@@ -1,5 +1,6 @@
 language: shell
 script: cd Technical-Task 
 script: cd gistAPI
+script: pwd
 script: python3 gistAPI.py
 
