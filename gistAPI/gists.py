@@ -43,10 +43,6 @@ class TestGistRequests(unittest.TestCase):
         assert response.json()[0]['public'] == True
 
     def test_get_gist(self):
-        # we can use f'{string}' format to pass gist id that we created above 
-        # but using a fixed gist ID so the test is not dependant on the created one
-        # as well unittest is not running in sequence so it might be failing if the 
-        # delete request ran first and it will run first :) 
         route = base_url + f"/gists/{old_gist_id}"
         headers = {"Accept": "application/vnd.github.v3+json"}
         response = requests.get(route, headers=headers, auth=(username, token))
