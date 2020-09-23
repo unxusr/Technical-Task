@@ -12,7 +12,7 @@ class TestGistRequests(unittest.TestCase):
     username = os.environ.get("username")
     token = os.environ.get("token")
     base_url = os.environ.get("baseUrl")
-    old_gist_id = "19c6092c845cddb519fb625ba7c1d514"
+    old_gist_id = "502d41c0453affce059e552444d8357e"
     
     
     def setUp(self):
@@ -49,19 +49,19 @@ class TestGistRequests(unittest.TestCase):
         assert response.json()[0]['public'] == True
 
     def test_get_gist(self):
-        route = base_url + "/gists/{}".format(old_gist_id)
+        route = base_url + f"/gists/{old_gist_id}"
         headers = {"Accept": "application/vnd.github.v3+json"}
         response = requests.get(route, headers=headers, auth=(username, token))
         assert response.status_code == 200
 
     def test_list_starred_gists(self):
-        route = base_url + "/gists/starred"
+        route = base_url + f"/gists/starred"
         headers = {"Accept": "application/vnd.github.v3+json"}
         response = requests.get(route, headers=headers, auth=(username, token))
         assert response.status_code == 200
 
     def test_update_gist(self):
-        route = base_url + "/gists/{}".format(old_gist_id)
+        route = base_url + f"/gists/{old_gist_id}"
         fake_description = fake.sentence()
         payload = {"description":fake_description}
         payload = json.dumps(payload)
@@ -71,19 +71,19 @@ class TestGistRequests(unittest.TestCase):
         assert response.json()['description'] == fake_description
     
     def test_list_gist_commits(self):
-        route = base_url + "/gists/{}/commits".format(old_gist_id)
+        route = base_url + f"/gists/{old_gist_id}/commits"
         headers = {"Accept": "application/vnd.github.v3+json"}
         response = requests.get(route, headers=headers, auth=(username, token))
         assert response.status_code == 200 
 
     def test_zdelete_gist(self):
-        route = base_url + "/gists/{}".format(old_gist_id)
+        route = base_url + f"/gists/{new_gist_id}"
         headers = {"Accept": "application/vnd.github.v3+json"}
         response = requests.delete(route, headers=headers, auth=(username, token))
         assert response.status_code == 204
 
     def test_list_gist_forks(self):
-        route = base_url + "/gists/{}/commits".format(old_gist_id)
+        route = base_url + f"/gists/{old_gist_id}/commits"
         headers = {"Accept": "application/vnd.github.v3+json"}
         response = requests.get(route, headers=headers, auth=(username, token))
         assert response.status_code == 200
@@ -112,7 +112,7 @@ class TestGistRequests(unittest.TestCase):
         username = os.environ.get("username")
         token = os.environ.get("token")
         base_url = os.environ.get("baseUrl")
-        route = base_url + "/gists/{}/star".format(old_gist_id)
+        route = base_url + f"/gists/{old_gist_id}/star"
         headers = {"Accept": "application/vnd.github.v3+json"}
         response = requests.get(route, headers=headers, auth=(username, token))
         if response.status_code == 204:
@@ -123,13 +123,13 @@ class TestGistRequests(unittest.TestCase):
             assert response.status_code == 404
     
     def test_star_gist(self):
-        route = base_url + "/gists/{}/star".format(old_gist_id)
+        route = base_url + f"/gists/{old_gist_id}/star"
         headers = {"Accept": "application/vnd.github.v3+json"}
         response = requests.put(route, headers=headers, auth=(username, token))
         assert response.status_code == 204
     
     def test_unstar_gist(self):
-        route = base_url + "/gists/{}/star".format(old_gist_id)
+        route = base_url + f"/gists/{old_gist_id}/star"
         headers = {"Accept": "application/vnd.github.v3+json"}
         response = requests.delete(route, headers=headers, auth=(username, token))
         assert response.status_code == 204
@@ -147,13 +147,13 @@ class TestGistRequests(unittest.TestCase):
         assert response.status_code == 200
 
     def test_list_gist_comments(self):
-        route = base_url + "/gists/{}/comments".format(old_gist_id)
+        route = base_url + f"/gists/{old_gist_id}/comments"
         headers = {"Accept": "application/vnd.github.v3+json"}
         response = requests.get(route, headers=headers, auth=(username, token))
         assert response.status_code == 200
 
     def test_create_gist_comment(self):
-        route = base_url + "/gists/{}/comments".format(old_gist_id)
+        route = base_url + f"/gists/{old_gist_id}/comments"
         payload = {"body":fake.sentence()}
         payload = json.dumps(payload)
         headers = {"Accept": "application/vnd.github.v3+json"}
@@ -163,13 +163,13 @@ class TestGistRequests(unittest.TestCase):
         assert response.status_code == 201
 
     def test_get_gist_comment(self):
-        route = base_url + "/gists/{}/comments/{}".format(old_gist_id, comment_id)
+        route = base_url + f"/gists/{old_gist_id}/comments/{comment_id}"
         headers = {"Accept": "application/vnd.github.v3+json"}
         response = requests.get(route, headers=headers, auth=(username, token))
         assert response.status_code == 200
 
     def test_update_gist_comment(self):
-        route = base_url + "/gists/{}/comments/{}".format(old_gist_id, comment_id)
+        route = base_url + f"/gists/{old_gist_id}/comments/{comment_id}"
         payload = {"body":fake.sentence()}
         payload = json.dumps(payload)
         headers = {"Accept": "application/vnd.github.v3+json"}
@@ -177,7 +177,7 @@ class TestGistRequests(unittest.TestCase):
         assert response.status_code == 200
 
     def test_zdelete_comment(self):
-        route = base_url + "/gists/{}/comments/{}".format(old_gist_id, comment_id)
+        route = base_url + f"/gists/{old_gist_id}/comments/{comment_id}"
         headers = {"Accept": "application/vnd.github.v3+json"}
         response = requests.delete(route, headers=headers, auth=(username, token))
         assert response.status_code == 204
