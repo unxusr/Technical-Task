@@ -11,5 +11,5 @@ install:
         pip3 install --user -r requirements.txt
 
 language: shell
-script: source .env && cd gistAPI && python3 gists.py
+script: source .env && cd gistAPI && python3.6 gists.py
 
