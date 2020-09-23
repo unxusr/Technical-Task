@@ -8,6 +8,7 @@ Automate Gist web UI, REST APIs and mobile app test cases
 
 2- `test_fork_gist` API request not allowed by gist owner so i passed it by `pass` statment after testing it for one time for other's gist, I assume to put another gist ID in that request before running.
 
+3- Because it is my github personal account so i changed the password that has been commited before (that was to run tests in travis CI), i assume task reviewer to use his own github credentials (username, password and personal access token), However i kept the generated token in the .env file but with a lower privileges.
 
 ## Installation
 
@@ -69,6 +70,27 @@ Then we can cancel the ride safely as long as we didnt reached the take off time
 
 Then adding a payment method to the account by filling card details form.
 
+## Bug reporting
+
+**What happens?**
+
+While booking a ride and the device location is turned off found far pickup points from the one inserted manually.
+
+**Expected result:**
+
+To get all available pickup points near to the one that inserted manually.
+
+**Actual result:**
+
+Got far away pickup points from the one inserted manually
+
+**Steps to reproduce:**
+
+1. Turn off device location
+2. Open the app
+3. Press on "Where to?" field
+4. Enter pickup point manually
+5. Enter drop off location
 
 ## CI/CD
  Travis CI used for this project
