@@ -19,6 +19,12 @@ class TestGistRequests(unittest.TestCase):
         print("Running", self._testMethodName)
 
 
+    def test_list_gists_for_the_authenticated_user(self):
+        route = base_url + "/gists"
+        headers = {"Accept": "application/vnd.github.v3+json"}
+        response = requests.get(route, headers=headers, auth=(username, token))
+        assert response.status_code == 200
+        
     def test_create_gist(self):
         route = base_url + "/gists"
         headers = {"Accept": "application/vnd.github.v3+json"}
