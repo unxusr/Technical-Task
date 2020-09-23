@@ -1,15 +1,17 @@
 dist: trusty
+language: shell
+script: cd Technical-Task && source .env
 addons:
         apt:
             packages:
                     - "python3"
                     - "python3-pip" 
+
 language: python
 python: 3.6
 install:
         pip3 install --user -r requirements.txt
 
 language: shell
-script: cd Technical-Task && source .env 
 script: cd gistAPI && python3 gists.py
 
