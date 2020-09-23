@@ -1,7 +1,7 @@
 language: python
 python: 3.6
 install:
-        pip install -r requirements.txt
+        pip3 install -r requirements.txt
 
 language: shell
 script: cd Technical-Task 
