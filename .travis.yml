@@ -1,6 +1,4 @@
 language: shell
-script: cd Technical-Task 
-script: cd gistAPI
 script: pwd
 
 language: python
@@ -8,5 +6,7 @@ python: 3.6
 install:
         pip3 install -r requirements.txt
 
+script: cd Technical-Task 
+script: cd gistAPI
 script: python3 gistAPI.py
 
